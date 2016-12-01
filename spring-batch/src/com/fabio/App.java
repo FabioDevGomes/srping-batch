@@ -9,29 +9,23 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
-	  public static void main(String[] args)  {
+	public static void main(String[] args) {
 
-		  String[] springConfig  =
-				{
-					"resources/spring/batch/jobs/job-hello-world.xml"
-				};
+		String[] springConfig = { "resources/spring/batch/jobs/job-hello-world.xml" };
 
-			ApplicationContext context =
-					new ClassPathXmlApplicationContext(springConfig);
-//
-			try {
-		JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
-		Job job = (Job) context.getBean("helloWorldJob");
-
+		ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
+		try {
+			JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
+			Job job = (Job) context.getBean("helloWorldJob");
 
 			JobExecution execution = jobLauncher.run(job, new JobParameters());
 			System.out.println("Exit Status : " + execution.getStatus());
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 
 		System.out.println("Done");
 
-	  }
 	}
+}
